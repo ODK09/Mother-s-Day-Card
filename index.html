@@ -1,79 +1,75 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const landingPage = document.getElementById('landing-page');
-    const setupScreen = document.getElementById('setup-screen');
-    const cardScreen = document.getElementById('card-screen');
-    const startBtn = document.getElementById('start-btn');
-    const generateBtn = document.getElementById('generate-btn');
-    const downloadBtn = document.getElementById('download-btn');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mother's Day | Your Style Book</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Caveat:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <!-- html2canvas library for JPEG export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
 
-    const nameInput = document.getElementById('mom-name-input');
-    const msgInput = document.getElementById('message-input');
-    const photoInput = document.getElementById('photo-upload');
-    const fileStatus = document.getElementById('file-status');
+    <!-- STATE 1: PINK AURORA LANDING PAGE -->
+    <section id="landing-page" class="aurora-container">
+        <div class="aurora-bg"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Celebrate that Mother figure in your life today</h1>
+            <p class="hero-subtitle">Turn your memories into a beautiful digital scrapbook. Every flower, every word, just for Mom.</p>
+            <button id="start-btn" class="main-cta">Start My Book</button>
+        </div>
+    </section>
 
-    const finalName = document.getElementById('final-name');
-    const finalMsg = document.getElementById('final-message');
-    const finalPhoto = document.getElementById('final-photo');
+    <!-- STATE 2: THE INPUT FORM -->
+    <main id="setup-screen" class="container hidden">
+        <section class="form-card">
+            <h2>The Details</h2>
+            <div class="field">
+                <label>Her Name</label>
+                <input type="text" id="mom-name-input" placeholder="e.g. Mama Linda">
+            </div>
+            <div class="field">
+                <label>The Message</label>
+                <textarea id="message-input" placeholder="Write from the heart..."></textarea>
+            </div>
+            <div class="field">
+                <label class="upload-box">
+                    <span id="file-status">📸 Add a Photo</span>
+                    <input type="file" id="photo-upload" accept="image/*">
+                </label>
+            </div>
+            <button id="generate-btn">Create Digital Card</button>
+        </section>
+    </main>
 
-    // 1. Live Upload Feedback (Fixes the "no photo showing" issue)
-    photoInput.addEventListener('change', function() {
-        if (this.files && this.files[0]) {
-            fileStatus.innerHTML = `✅ <span style="color: #db2777; font-weight: bold;">Photo Ready:</span> ${this.files[0].name}`;
-            this.parentElement.style.borderColor = "#db2777";
-            this.parentElement.style.background = "#fdf2f8";
-        }
-    });
+    <!-- STATE 3: THE STYLE BOOK CARD -->
+    <div id="card-screen" class="hidden">
+        <div class="flower-decor top-left">🌸</div>
+        <div class="flower-decor bottom-right">🌺</div>
 
-    // 2. Start Button
-    startBtn.addEventListener('click', () => {
-        landingPage.classList.add('hidden');
-        setupScreen.classList.remove('hidden');
-    });
-
-    // 3. Generate Card
-    generateBtn.addEventListener('click', () => {
-        const nameVal = nameInput.value.trim();
-        const msgVal = msgInput.value.trim();
-        const file = photoInput.files[0];
-
-        if (!nameVal || !msgVal || !file) {
-            alert("Please fill in all fields and upload a photo!");
-            return;
-        }
-
-        finalName.innerText = `Dear ${nameVal},`;
-        finalMsg.innerText = msgVal;
-
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            finalPhoto.src = e.target.result;
-            setupScreen.classList.add('hidden');
-            cardScreen.classList.remove('hidden');
-            window.scrollTo(0, 0);
-        };
-        reader.readAsDataURL(file);
-    });
-
-    // 4. Download as JPEG (New Update)
-    downloadBtn.addEventListener('click', () => {
-        const card = document.querySelector('.style-book');
-        
-        // Temporarily remove the slight rotation for a cleaner crop
-        card.style.transform = "none";
-
-        html2canvas(card, {
-            useCORS: true,
-            scale: 3, // High quality
-            backgroundColor: "#fffef0"
-        }).then(canvas => {
-            const image = canvas.toDataURL("image/jpeg", 0.9);
-            const link = document.createElement('a');
-            link.download = `Mothers_Day_Card.jpg`;
-            link.href = image;
-            link.click();
+        <div class="style-book">
+            <div class="polaroid-frame">
+                <img id="final-photo" src="" alt="Memory">
+                <div class="tape"></div>
+            </div>
             
-            // Put the rotation back
-            card.style.transform = "rotate(-1deg)";
-        });
-    });
-});
+            <div class="journal-content">
+                <h2 id="final-name">Dear Mom,</h2>
+                <p id="final-message"></p>
+                <div class="journal-footer">
+                    <p>Happy Mother's Day 2026</p>
+                    <span class="sparkle">✨</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="action-buttons">
+            <button id="download-btn" class="secondary-btn">Download as JPEG</button>
+            <button onclick="location.reload()" class="text-btn">Start Over</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
