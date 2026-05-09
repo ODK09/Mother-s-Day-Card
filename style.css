@@ -1,30 +1,24 @@
 :root {
-    /* Pink Theme Palette */
     --pink-light: #fdf2f8;
     --pink-200: #fbcfe8;
     --pink-400: #f472b6;
     --pink-600: #db2777;
-    --paper: #fffef0; /* Off-white notebook color */
-    --white: #ffffff;
-    --black: #000000;
+    --paper: #fffef0;
 }
 
-/* Base Reset & Scrolling Fix */
 body {
     margin: 0;
     padding: 0;
     font-family: 'Inter', sans-serif;
     background: var(--pink-light);
     overflow-x: hidden;
-    overflow-y: auto; /* Allow the user to scroll down */
+    overflow-y: auto;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
 }
 
 .hidden { display: none !important; }
 
-/* --- PINK AURORA LANDING PAGE --- */
+/* PINK AURORA LANDING */
 .aurora-container {
     position: relative;
     height: 100vh;
@@ -34,7 +28,6 @@ body {
     justify-content: center;
     background-color: var(--pink-600);
     overflow: hidden;
-    flex-shrink: 0; /* Prevents the landing page from squishing */
 }
 
 .aurora-bg {
@@ -54,88 +47,29 @@ body {
     to { background-position: 350% 50%; }
 }
 
-.hero-content {
-    position: relative;
-    z-index: 10;
-    text-align: center;
-    color: white;
-    padding: 20px;
-    max-width: 800px;
-}
+.hero-content { position: relative; z-index: 10; text-align: center; color: white; padding: 20px; max-width: 800px; }
+.hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 7vw, 4rem); margin-bottom: 20px; line-height: 1.2; }
+.main-cta { background: white; color: var(--pink-600); border: none; padding: 18px 45px; border-radius: 50px; font-weight: 700; cursor: pointer; }
 
-.hero-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.5rem, 8vw, 4.5rem);
-    margin-bottom: 20px;
-    line-height: 1.1;
-}
-
-.hero-subtitle {
-    font-size: 1.2rem;
-    font-weight: 300;
-    margin-bottom: 40px;
-    opacity: 0.9;
-}
-
-.main-cta {
-    background: white;
-    color: var(--pink-600);
-    border: none;
-    padding: 18px 45px;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.main-cta:hover { transform: scale(1.05); }
-
-/* --- THE GENERATOR FORM --- */
-.container {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 40px 20px;
-}
-
-.form-card {
-    background: white;
-    padding: 40px;
-    border-radius: 20px;
-    width: 100%;
-    max-width: 400px;
-    box-shadow: 0 10px 40px rgba(219, 39, 119, 0.1);
-    text-align: center;
-}
-
+/* FORM SECTION */
+.container { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 40px 20px; }
+.form-card { background: white; padding: 40px; border-radius: 20px; width: 100%; max-width: 400px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); text-align: center; }
 .field { margin-bottom: 20px; text-align: left; }
 label { display: block; font-size: 12px; font-weight: 700; color: var(--pink-600); margin-bottom: 8px; text-transform: uppercase; }
-input, textarea { width: 100%; padding: 12px; border: 1px solid var(--pink-200); border-radius: 10px; box-sizing: border-box; font-family: inherit; }
-textarea { height: 120px; resize: none; }
-
-.upload-box {
-    display: block; padding: 20px; border: 2px dashed var(--pink-200); border-radius: 10px; cursor: pointer; color: var(--pink-400); transition: 0.3s;
-}
-.upload-box:hover { background: var(--pink-light); }
+input, textarea { width: 100%; padding: 12px; border: 1px solid var(--pink-200); border-radius: 10px; box-sizing: border-box; }
+.upload-box { display: block; padding: 20px; border: 2px dashed var(--pink-200); border-radius: 10px; cursor: pointer; text-align: center; }
 #photo-upload { display: none; }
+#generate-btn { width: 100%; padding: 16px; background: var(--pink-600); color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: 600; }
 
-#generate-btn {
-    width: 100%; padding: 16px; background: var(--pink-600); color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer;
-}
-
-/* --- THE STYLE BOOK (CARD SCREEN) --- */
+/* CARD SCREEN */
 #card-screen {
     min-height: 100vh;
-    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start; /* Fix for scrolling cutoff */
+    justify-content: flex-start;
     background: radial-gradient(circle, #fce7f3 0%, #fbcfe8 100%);
-    position: relative;
-    padding: 80px 20px; /* Space for the card to breathe */
+    padding: 60px 20px;
     box-sizing: border-box;
 }
 
@@ -149,71 +83,77 @@ textarea { height: 120px; resize: none; }
     position: relative;
     transform: rotate(-1deg);
     margin-bottom: 40px;
+    box-sizing: border-box;
+    /* Ensure the screenshot captures everything clearly */
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
 }
 
 .polaroid-frame {
     background: white;
-    padding: 15px 15px 60px 15px; /* The polaroid "chin" */
+    padding: 15px 15px 60px 15px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
     margin-bottom: 30px;
     position: relative;
     transform: rotate(2deg);
 }
 
-.tape {
-    position: absolute;
-    top: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 35px;
-    background: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(2px);
-    border: 1px solid rgba(0,0,0,0.03);
-}
-
+.tape { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); width: 100px; height: 35px; background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(2px); border: 1px solid rgba(0,0,0,0.03); }
 #final-photo { width: 100%; height: 300px; object-fit: cover; }
 
-.journal-content h2 { font-family: 'Playfair Display', serif; color: var(--pink-600); font-style: italic; font-size: 2.2rem; margin: 0 0 15px 0; }
+/* JOURNAL TEXT & LINES */
+.journal-content {
+    text-align: left;
+    width: 100%;
+}
+
+.journal-content h2 { 
+    font-family: 'Playfair Display', serif; 
+    color: var(--pink-600); 
+    font-style: italic; 
+    font-size: 2.2rem; 
+    margin: 0 0 10px 0;
+}
 
 #final-message {
     font-family: 'Caveat', cursive;
-    font-size: 2rem;
-    line-height: 1.2;
+    font-size: 1.8rem;
+    line-height: 2rem; /* Spacing between lines of text */
     color: #334155;
     margin: 0;
+    
+    /* FIX: Prevents text from going off the page */
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+
+    /* NOTEBOOK LINES EFFECT */
+    background-image: linear-gradient(transparent 95%, var(--pink-200) 5%);
+    background-size: 100% 2rem; /* Matches the line-height exactly */
+    background-attachment: local;
+    padding-bottom: 10px;
 }
 
-.journal-footer {
-    margin-top: 40px;
-    border-top: 1px dashed var(--pink-400);
-    padding-top: 15px;
-    font-family: 'Caveat', cursive;
-    display: flex;
-    justify-content: space-between;
+.journal-footer { 
+    margin-top: 40px; 
+    border-top: 1px dashed var(--pink-400); 
+    padding-top: 15px; 
+    font-family: 'Caveat', cursive; 
+    display: flex; 
+    justify-content: space-between; 
+    color: var(--pink-400); 
     font-size: 1.4rem;
-    color: var(--pink-400);
 }
 
-/* Decorations */
-.flower-decor { position: absolute; font-size: 5rem; z-index: 0; opacity: 0.7; pointer-events: none; }
+/* EXTRAS */
+.flower-decor { position: absolute; font-size: 5rem; opacity: 0.7; pointer-events: none; z-index: 0; }
 .top-left { top: 5%; left: 5%; transform: rotate(-20deg); }
 .bottom-right { bottom: 5%; right: 5%; transform: rotate(15deg); }
 
-/* Bottom Action Buttons */
-.action-buttons {
-    display: flex;
-    gap: 15px;
-    z-index: 20;
-    margin-bottom: 50px;
-}
-
+.action-buttons { display: flex; gap: 15px; padding-bottom: 50px; }
 .secondary-btn { padding: 12px 25px; background: #1e293b; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; }
 .text-btn { background: none; border: none; color: #64748b; cursor: pointer; text-decoration: underline; }
 
-/* Print Handling */
 @media print {
     .action-buttons, .flower-decor, #landing-page, #setup-screen { display: none; }
-    #card-screen { background: white; padding: 0; }
-    .style-book { box-shadow: none; border: none; transform: none; }
 }
